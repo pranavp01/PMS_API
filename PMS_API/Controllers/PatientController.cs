@@ -31,8 +31,6 @@ namespace PMS_API.Controllers
         {
             try
             {
-
-
                 var result = await _patientBusiness.AddPatient(patientModel);
                 return Ok(result);
             }

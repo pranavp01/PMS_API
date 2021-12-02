@@ -13,6 +13,7 @@ namespace PMS_Models
         public static IServiceCollection RegisterBusinessDependencies(this IServiceCollection services)
         {
             services.AddTransient<IPatientRepository,PatientRepository>();
+            services.AddTransient<IUserRepository,UserRepository>();
             return services;
         }
     }

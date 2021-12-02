@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
+
 // Code scaffolded by EF Core assumes nullable reference types (NRTs) are not used or disabled.
 // If you have enabled NRTs for your project, then un-comment the following line:
 // #nullable disable
@@ -20,13 +21,15 @@ namespace PMS_Repository.Dtos
         }
 
         public virtual DbSet<Patient> Patient { get; set; }
+        public virtual DbSet<RolesModel> Roles { get; set; }
+        public virtual DbSet<User> User { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseSqlServer("Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=C:\\Users\\PranavP3\\OneDrive - CitiusTech\\Documents\\PMS.mdf;Integrated Security=True;Connect Timeout=30");
+                optionsBuilder.UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=\"C:\\USERS\\PRANAVP3\\ONEDRIVE - CITIUSTECH\\DOCUMENTS\\PMS.MDF\";Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
             }
         }
 
@@ -41,11 +44,11 @@ namespace PMS_Repository.Dtos
 
                 entity.Property(e => e.Count).HasColumnName("count");
 
+                entity.Property(e => e.CreatedAt).HasColumnType("datetime");
+
                 entity.Property(e => e.Dob)
                     .HasColumnName("DOB")
                     .HasColumnType("datetime");
-
-                entity.Property(e => e.CreatedAt).HasColumnName("CreatedAt").HasColumnType("datetime");
 
                 entity.Property(e => e.EmailId)
                     .HasColumnName("emailId")
@@ -76,6 +79,79 @@ namespace PMS_Repository.Dtos
                     .HasColumnName("title")
                     .HasMaxLength(3)
                     .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<RolesModel>(entity =>
+            {
+                entity.HasKey(e => e.Id).HasName("PK__Roles__3213E83F1D2D50D9");
+
+                entity.Property(e => e.CreatedAt).HasColumnType("datetime");
+
+                entity.Property(e => e.Rolename)
+                    .IsRequired()
+                    .HasColumnName("rolename")
+                    .HasMaxLength(10)
+                    .IsFixedLength();
+            });
+
+            modelBuilder.Entity<User>(entity =>
+            {
+                entity.HasKey(e => e.Id).HasName("PK__User__3214EC077504FE59");
+
+                entity.Property(e => e.Contactno)
+                    .HasColumnName("contactno")
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.CreatedAt).HasColumnType("datetime");
+
+                entity.Property(e => e.Dob)
+                    .HasColumnName("DOB")
+                    .HasColumnType("date");
+
+                entity.Property(e => e.EmailId)
+                    .IsRequired()
+                    .HasColumnName("emailId")
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Firstname)
+                    .IsRequired()
+                    .HasColumnName("firstname")
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.IsBlocked).HasColumnName("isBlocked");
+
+                entity.Property(e => e.IsFirstLogin).HasColumnName("isFirstLogin");
+
+                entity.Property(e => e.Lastname)
+                    .IsRequired()
+                    .HasColumnName("lastname")
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ModifiedAt).HasColumnType("datetime");
+
+                entity.Property(e => e.Password)
+                    .IsRequired()
+                    .HasColumnName("password")
+                    .HasMaxLength(200)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Role).HasColumnName("role");
+
+                entity.Property(e => e.Title)
+                    .IsRequired()
+                    .HasColumnName("title")
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.HasOne(d => d.IdNavigation)
+                    .WithOne(p => p.User)
+                    .HasForeignKey<User>(d => d.Id)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_User_RoleId");
             });
 
             OnModelCreatingPartial(modelBuilder);

@@ -6,6 +6,7 @@ using System.Data;
 using System.Linq;
 using PMS_Repository.Dtos;
 using System.Threading.Tasks;
+using System.Linq.Expressions;
 
 namespace PMS_Repository
 {
@@ -147,6 +148,16 @@ namespace PMS_Repository
             return await DbSet.ToListAsync();
         }
 
+        public async virtual Task<IEnumerable<TEntity>> EntityWithEagerLoad(Expression<Func<TEntity,bool>> filter,string[] children)
+        {
+            IQueryable<TEntity> query = this.DbSet;
+            foreach(string entity in children)
+            {
+                query = query.Include(entity);
+            }
+            return await query.Where(filter).ToListAsync();
+        }
+
         /// <summary>
         /// Inclue multiple
         /// </summary>
@@ -168,6 +179,11 @@ namespace PMS_Repository
         public async Task<bool> Exists(object primaryKey)
         {
             return await DbSet.FindAsync(primaryKey) != null;
+        }
+
+        public async virtual Task<TEntity> FirstOrDefault(Expression<Func<TEntity,bool>> predicate)
+        {
+            return await DbSet.FirstOrDefaultAsync(predicate);
         }
 
         /// <summary>

@@ -16,6 +16,7 @@ namespace PMS_API
         {
             services.RegisterBusinessDependencies();
             services.AddTransient<IPatientBusiness,PatientBusiness>();
+            services.AddTransient<IUserBusiness, UserBusiness>();
             return services;
         }
     }
