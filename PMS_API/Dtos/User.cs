@@ -5,7 +5,7 @@ using System.Collections.Generic;
 // If you have enabled NRTs for your project, then un-comment the following line:
 // #nullable disable
 
-namespace PMS_Repository.Dtos
+namespace PMS_API.Dtos
 {
     public partial class User
     {
@@ -24,6 +24,6 @@ namespace PMS_Repository.Dtos
         public byte IsActive { get; set; }
         public int Id { get; set; }
 
-        public virtual RolesModel RoleNavigation { get; set; }
+        public virtual Roles RoleNavigation { get; set; }
     }
 }

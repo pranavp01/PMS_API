@@ -5,14 +5,19 @@ using System.Collections.Generic;
 // If you have enabled NRTs for your project, then un-comment the following line:
 // #nullable disable
 
-namespace PMS_Models
+namespace PMS_API.Dtos
 {
     public partial class Roles
     {
-        public int Id { get; set; }
+        public Roles()
+        {
+            User = new HashSet<User>();
+        }
+
         public string Rolename { get; set; }
         public DateTime? CreatedAt { get; set; }
+        public int Id { get; set; }
 
-        public virtual ICollection<UserModel> User { get; set; }
+        public virtual ICollection<User> User { get; set; }
     }
 }
