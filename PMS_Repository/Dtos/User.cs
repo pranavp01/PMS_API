@@ -22,7 +22,7 @@ namespace PMS_Repository.Dtos
         public DateTime Dob { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime? ModifiedAt { get; set; }
-
+        public int IsActive { get; set; }
         public virtual RolesModel IdNavigation { get; set; }
     }
 }

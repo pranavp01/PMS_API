@@ -123,6 +123,8 @@ namespace PMS_Repository.Dtos
 
                 entity.Property(e => e.IsBlocked).HasColumnName("isBlocked");
 
+                entity.Property(e => e.IsActive).HasColumnName("isActive");
+
                 entity.Property(e => e.IsFirstLogin).HasColumnName("isFirstLogin");
 
                 entity.Property(e => e.Lastname)
