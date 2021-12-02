@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 
 // Code scaffolded by EF Core assumes nullable reference types (NRTs) are not used or disabled.
@@ -23,7 +24,7 @@ namespace PMS_Repository.Dtos
         public DateTime? ModifiedAt { get; set; }
         public byte IsActive { get; set; }
         public int Id { get; set; }
-
+        [JsonIgnore]
         public virtual RolesModel RoleNavigation { get; set; }
     }
 }

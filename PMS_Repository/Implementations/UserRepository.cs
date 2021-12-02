@@ -56,23 +56,41 @@ namespace PMS_Repository.Implementations
 
         public IQueryable<User> GetUserById(int id)
         {
-            var user = _unitOfWork.UserRepository.GetWithInclude(user => user.Id == id);
-            if (user != null)
-            {
-                return user;
-            }
+            //    var user = _unitOfWork.UserRepository.GetWithInclude(user => user.Id == id);
+            //    if (user != null)
+            //    {
+            //        return user;
+            //    }
+            //    return null;
+            //}
             return null;
         }
 
         public async Task<IEnumerable<User>> GetUsers()
         {
-            IEnumerable<User> Users = await _unitOfWork.UserRepository.GetAll();
+            IEnumerable<User> Users = await _unitOfWork.UserRepository.GetAll(d=>d.RoleNavigation);
             return Users;
         }
 
-        public Task<int> Login(string email, string password)
+        public async Task<User> Login(string email, string password)
         {
-            throw new NotImplementedException();
+            string[] navigationProperty = { "RoleNavigation" };
+            var user = await _unitOfWork.UserRepository.GetWithInclude(us => us.EmailId == email, navigationProperty);
+            if(user !=null)
+            {
+                if(user.Password==password)
+                {
+                    return user;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            else
+            {
+                return null;
+            }
         }
     }
 }

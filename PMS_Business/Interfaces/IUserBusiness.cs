@@ -10,7 +10,7 @@ namespace PMS_Business.Interfaces
     public interface IUserBusiness
     {
         IQueryable<UserModel> GetUserById(int id);
-        Task<int> Login(string email, string password);
+        Task<UserModel> Login(string email, string password);
         Task<IEnumerable<UserModel>> GetUsers();
         Task<bool> AddUser(UserModel user);
         Task<bool> ChangePassword(string email, string oldPassword, string newPassword);

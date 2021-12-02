@@ -44,9 +44,10 @@ namespace PMS_Business.Implementations
             return _mapper.Map<IEnumerable<UserModel>>(usersDto);
         }
 
-        public Task<int> Login(string email, string password)
+        public async Task<UserModel> Login(string email, string password)
         {
-            throw new NotImplementedException();
+            var userDto = await _userRepository.Login(email, password);
+            return  _mapper.Map<UserModel>(userDto);
         }
     }
 }

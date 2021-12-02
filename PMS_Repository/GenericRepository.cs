@@ -158,17 +158,45 @@ namespace PMS_Repository
             return await query.Where(filter).ToListAsync();
         }
 
+        public virtual async Task<IEnumerable<TEntity>> GetAll(params Expression<Func<TEntity, object>>[] properties)
+        {
+            if (properties == null)
+                throw new ArgumentNullException(nameof(properties));
+
+            var query = this.DbSet as IQueryable<TEntity>; // _dbSet = dbContext.Set<TEntity>()
+
+            query = properties
+                       .Aggregate(query, (current, property) => current.Include(property));
+
+            return await query.AsNoTracking().ToListAsync(); //readonly
+        }
+        public virtual async Task<TEntity> GetSingleEntityWithInclude(params Expression<Func<TEntity, object>>[] properties)
+        {
+            if (properties == null)
+                throw new ArgumentNullException(nameof(properties));
+
+            var query = this.DbSet as IQueryable<TEntity>; // _dbSet = dbContext.Set<TEntity>()
+
+            query = properties
+                       .Aggregate(query, (current, property) => current.Include(property));
+
+            return await query.AsNoTracking().FirstOrDefaultAsync(); //readonly
+        }
+
+
+
+
         /// <summary>
         /// Inclue multiple
         /// </summary>
         /// <param name="predicate"></param>
         /// <param name="include"></param>
         /// <returns></returns>
-        public IQueryable<TEntity> GetWithInclude(System.Linq.Expressions.Expression<Func<TEntity, bool>> predicate, params string[] include)
+        public virtual async Task<TEntity> GetWithInclude(System.Linq.Expressions.Expression<Func<TEntity, bool>> predicate, params string[] include)
         {
             IQueryable<TEntity> query = this.DbSet;
             query = include.Aggregate(query, (current, inc) => current.Include(inc));
-            return query.Where(predicate);
+            return await query.Where(predicate).FirstOrDefaultAsync();
         }
 
         /// <summary>

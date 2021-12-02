@@ -10,7 +10,7 @@ namespace PMS_Repository.Interfaces
    public interface IUserRepository
     {
         IQueryable<User> GetUserById(int id);
-        Task<int> Login(string email, string password);
+        Task<User> Login(string email, string password);
         Task<IEnumerable<User>> GetUsers();
         Task<bool> AddUser(User user);
         Task<bool> ChangePassword(string email, string oldPassword, string newPassword);
