@@ -28,6 +28,7 @@ namespace PMS_API.Controllers
 
         [HttpGet]
         [Authorize(Roles =RoleConstants.Admin)]
+        [Route("getallusers")]
         public async Task<ActionResult<IEnumerable<UserModel>>> GetAllUsers()
         {
             try

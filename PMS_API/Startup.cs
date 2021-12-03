@@ -79,6 +79,9 @@ namespace PMS_API
             {
                 app.UseDeveloperExceptionPage();
             }
+            app.UseAuthentication();
+            app.UseAuthorization();
+            app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyMethod());
 
             app.UseHttpsRedirection();
             app.UseSwagger();
