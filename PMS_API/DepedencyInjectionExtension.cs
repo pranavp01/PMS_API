@@ -7,6 +7,7 @@ using PMS_Business;
 using PMS_Models;
 using PMS_Business.Implementations;
 using PMS_Business.Interfaces;
+using PMS_API.Services;
 
 namespace PMS_API
 {
@@ -16,6 +17,8 @@ namespace PMS_API
         {
             services.RegisterBusinessDependencies();
             services.AddTransient<IPatientBusiness,PatientBusiness>();
+            services.AddTransient<IUserBusiness, UserBusiness>();
+            
             return services;
         }
     }
