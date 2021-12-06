@@ -44,7 +44,7 @@ namespace PMS_API.Controllers
         }
 
         [HttpPost]
-
+        [Authorize(Roles = RoleConstants.Admin)]
         public async Task<ActionResult<bool>> AddUser(UserModel userModel)
         {
             try
