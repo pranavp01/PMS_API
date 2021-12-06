@@ -19,9 +19,10 @@ namespace PMS_Repository.Dtos
         public string FirstName { get; set; }
         [Required,MinLength(2,ErrorMessage = "Please don't use abbreviations")]
         public string LastName { get; set; }
+
         [Required,EmailAddress]
         public string EmailId { get; set; }
-
+       
         public DateTime? Dob { get; set; }
         public string Role { get; set; }
         public int? Count { get; set; }
