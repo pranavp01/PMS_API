@@ -10,6 +10,7 @@ namespace PMS_Repository.Dtos
 {
     public partial class Patient
     {
+        // test commit
         public int PId { get; set; }
 
         [Required]
