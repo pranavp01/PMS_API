@@ -27,7 +27,8 @@ namespace PMS_API.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles =RoleConstants.Admin)]
+        //[Authorize(Roles =RoleConstants.Admin)]
+        [AllowAnonymous]
         [Route("getallusers")]
         public async Task<ActionResult<IEnumerable<UserModel>>> GetAllUsers()
         {
@@ -36,15 +37,15 @@ namespace PMS_API.Controllers
                 var patients = await _userBusiness.GetUsers();
                 return Ok(patients);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return BadRequest(ex);
             }
-           
+
         }
 
         [HttpPost]
-        [Authorize(Roles = RoleConstants.Admin)]
+        [AllowAnonymous]
         public async Task<ActionResult<bool>> AddUser(UserModel userModel)
         {
             try
