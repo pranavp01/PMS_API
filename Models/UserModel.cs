@@ -15,6 +15,6 @@ namespace PMS_Models
         public string Contactno { get; set; }
         public int Role { get; set; }
         public DateTime Dob { get; set; }
-        public virtual Roles Roles { get; set; }
+        public string RoleName { get; set; }
     }
 }

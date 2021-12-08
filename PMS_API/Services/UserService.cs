@@ -45,7 +45,7 @@ namespace PMS_API.Services
                     Subject = new ClaimsIdentity(new Claim[]
                     {
                         new Claim(ClaimTypes.Name, user.User.Id.ToString()),
-                        new Claim(ClaimTypes.Role, user.User.Roles.Rolename.Trim())
+                        new Claim(ClaimTypes.Role, user.User.RoleName.Trim())
 
                     }),
                     Expires = DateTime.UtcNow.AddDays(7),
