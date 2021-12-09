@@ -12,7 +12,7 @@ namespace PMS_Business
         public AutoMapperProfiler()
         {
             CreateMap<PatientModel, Patient>().ReverseMap();
-            CreateMap<UserModel, User>().ForPath(source=>source.RoleNavigation.Rolename,destination=>destination.MapFrom(src=>src.RoleName)).ReverseMap();
+            CreateMap<UserModel, User>().ReverseMap().ForPath(source => source.RoleName, destination => destination.MapFrom(src => src.RoleNavigation.Rolename));
             CreateMap<RolesModel, Roles>().ForMember(dest => dest.User, opt => opt.MapFrom(src => src.User)).ReverseMap();
         }
     }

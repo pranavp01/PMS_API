@@ -1,6 +1,8 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Console;
 
 
 // Code scaffolded by EF Core assumes nullable reference types (NRTs) are not used or disabled.
@@ -11,6 +13,7 @@ namespace PMS_Repository.Dtos
 {
     public partial class PMSDbContext : DbContext
     {
+ 
         public PMSDbContext()
         {
         }
@@ -23,14 +26,14 @@ namespace PMS_Repository.Dtos
         public virtual DbSet<Patient> Patient { get; set; }
         public virtual DbSet<RolesModel> Roles { get; set; }
         public virtual DbSet<User> User { get; set; }
-        
+
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseSqlServer(@"Data Source = (localdb)\ProjectsV13; Initial Catalog = PMS; Integrated Security = True; Connect Timeout = 30; Encrypt = False; TrustServerCertificate = False; ApplicationIntent = ReadWrite; MultiSubnetFailover = False");
+                optionsBuilder.UseLoggerFactory(LoggerFactory.Create(builder => { builder.AddConsole(); })).EnableSensitiveDataLogging().UseSqlServer(@"Data Source = (localdb)\ProjectsV13; Initial Catalog = PMS; Integrated Security = True; Connect Timeout = 30; Encrypt = False; TrustServerCertificate = False; ApplicationIntent = ReadWrite; MultiSubnetFailover = False");
             }
         }
 
@@ -151,7 +154,7 @@ namespace PMS_Repository.Dtos
                     .HasConstraintName("FK_User_Roles");
             });
 
-         
+
         }
 
         partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
