@@ -17,7 +17,7 @@ namespace PMS_Repository.UnitOfWork
         private PMSDbContext _context = null;
         private GenericRepository<Patient> __patientRepository;
         private GenericRepository<User> _userRepository;
-        private GenericRepository<RolesModel> _rolesRepository;
+        private GenericRepository<Roles> _rolesRepository;
 
         #endregion
 
@@ -53,13 +53,13 @@ namespace PMS_Repository.UnitOfWork
         }
 
 
-        public GenericRepository<RolesModel> RolesRepistory
+        public GenericRepository<Roles> RolesRepistory
         {
             get
             {
                 if (_rolesRepository == null)
                 {
-                    _rolesRepository = new GenericRepository<RolesModel>(_context);
+                    _rolesRepository = new GenericRepository<Roles>(_context);
                 }
                 return _rolesRepository;
             }

@@ -27,7 +27,7 @@ namespace PMS_Repository.Implementations
         public async Task<int> AddPatient(Patient patient)
         {
 
-            patient.CreatedAt = DateTime.Now;
+            //patient.CreatedAt = DateTime.Now;
             _unitOfWork.PatientRepository.Insert(patient);
             return await _unitOfWork.Save();
         }
