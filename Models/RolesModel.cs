@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace PMS_Models
 {
-    public partial class Roles
+    public partial class RolesModel
     {
         public int Id { get; set; }
         public string Rolename { get; set; }

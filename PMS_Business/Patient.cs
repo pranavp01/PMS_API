@@ -5,7 +5,7 @@ using System.Collections.Generic;
 // If you have enabled NRTs for your project, then un-comment the following line:
 // #nullable disable
 
-namespace PMS_Repository.Dtos
+namespace PMS_API
 {
     public partial class Patient
     {
@@ -13,6 +13,7 @@ namespace PMS_Repository.Dtos
         {
             Allergies = new HashSet<Allergies>();
             EmergencyContactInfo = new HashSet<EmergencyContactInfo>();
+            VitalSigns = new HashSet<VitalSigns>();
         }
 
         public int Id { get; set; }
@@ -31,5 +32,6 @@ namespace PMS_Repository.Dtos
         public virtual User User { get; set; }
         public virtual ICollection<Allergies> Allergies { get; set; }
         public virtual ICollection<EmergencyContactInfo> EmergencyContactInfo { get; set; }
+        public virtual ICollection<VitalSigns> VitalSigns { get; set; }
     }
 }
