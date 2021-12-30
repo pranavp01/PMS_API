@@ -12,6 +12,7 @@ namespace PMS_Business.Interfaces
         Task<PatientModel> GetPatientById(int id);
 
         Task<bool> AddPatient(PatientModel patient);
+      //  Task<bool> AddPatientDetails(PatientInfoModel patientInfo);
 
         Task<bool> RemovePatient(int patientId);
 

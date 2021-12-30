@@ -7,16 +7,16 @@ using System.Collections.Generic;
 
 namespace PMS_Repository.Dtos
 {
-    public partial class RolesModel
+    public partial class Roles
     {
-
-        public RolesModel()
+        public Roles()
         {
             User = new HashSet<User>();
         }
-        public int Id { get; set; }
+
         public string Rolename { get; set; }
         public DateTime? CreatedAt { get; set; }
+        public int Id { get; set; }
 
         public virtual ICollection<User> User { get; set; }
     }
