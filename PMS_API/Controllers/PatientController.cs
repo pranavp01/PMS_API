@@ -13,6 +13,7 @@ namespace PMS_API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class PatientController : ControllerBase
     {
         private readonly IPatientBusiness _patientBusiness;
@@ -22,6 +23,7 @@ namespace PMS_API.Controllers
         }
 
         [HttpGet]
+        [Authorize("Patient,Admin,Physician,Nurse")]
         public async Task<ActionResult<IEnumerable<PatientModel>>> GetAllPatients()
         {
             var patients = await _patientBusiness.GetAll();
@@ -29,6 +31,7 @@ namespace PMS_API.Controllers
         }
 
         [HttpPost]
+        [AllowAnonymous]
         public async Task<ActionResult<bool>> AddPatient([FromBody]PatientModel patientModel)
         {
             try
