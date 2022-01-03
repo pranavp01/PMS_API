@@ -18,6 +18,7 @@ namespace PMS_Models
         public string Email { get; set; }
         public string HomeAddress { get; set; }
         public string Contactno { get; set; }
+        public int UserId { get; set; }
         public List<EmergencyContactInfoModel> EmergencyContactInfos { get; set; }
         public List<AllergyModel> Allergys { get; set; }
 
