@@ -20,6 +20,7 @@
     <ProjectReference Include="..\Models\PMS_Models.csproj" />
     <ProjectReference Include="..\PMS_API\PMS_API.csproj" />
     <ProjectReference Include="..\PMS_Business\PMS_Business.csproj" />
+    <ProjectReference Include="..\PMS_Repository\PMS_Repository.csproj" />
   </ItemGroup>
 
 </Project>

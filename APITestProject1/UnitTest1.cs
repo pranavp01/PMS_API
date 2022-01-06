@@ -7,10 +7,11 @@ using PMS_Business.Interfaces ;
 using Microsoft.Extensions.Options;
 using System.Threading.Tasks;
 using System.Net.Http.Headers;
-using PMS_Models;
-using System.Text.Json;
 using Newtonsoft.Json;
-//using System.Net.Http.Formatting.dll;
+using PMS_Repository.Interfaces;
+using PMS_Repository.Implementations;
+using PMS_Repository.Dtos;
+using System.Collections.Generic;
 
 namespace APITestProject1
 {
@@ -22,11 +23,13 @@ namespace APITestProject1
         private string ServiceUrl = "https://localhost:5001";
         private IOptions<AppSettings> appSettings;
         private string Token = "";
+        private IUserRepository userRepository;
 
         [SetUp]
         public void Setup()
         {
             _client = new HttpClient { BaseAddress = new Uri(ServiceUrl) };
+            userRepository = new UserRepository();
             _client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
         }
 
@@ -50,18 +53,28 @@ namespace APITestProject1
 
         public void GetToken()
         {
-            
+
             AuthenticateModel authenticateModel = new AuthenticateModel()
             {
                 Password = "buttabommamachi",
                 Username = "pranav.peddi@citiustech.com"
             };
-            var response = _client.PostAsJsonAsync("api/user", authenticateModel).Result;
+            var response = _client.PostAsJsonAsync("api/user/login", authenticateModel).Result;
             var res = response.Content.ReadAsStringAsync().Result;
-            var jsonSeriaziaer = new JsonSerializer();
-            UserApiModel userApiModel = (UserApiModel)JsonConvert.DeserializeObject(res);
-            Token= userApiModel.Token;
+            UserApiModel userApiModel = JsonConvert.DeserializeObject<UserApiModel>(res);
+            Token = userApiModel.Token;
         }
+
+
+        [Test]
+        public  void TetUserRepository()
+        {
+            var user=  userRepository.GetUsers();
+            Assert.IsNotNull(user);
+            Assert.That(user, Is.InstanceOf<Task<IEnumerable<User>>>());  
+        }
+
+     
 
     }
 }
