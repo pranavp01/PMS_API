@@ -32,7 +32,7 @@ namespace PMS_API.Services
         {
             UserApiModel user = new UserApiModel();
             user.User=await _userBusiness.Login(username, password);
-            if (user == null)
+            if (user.User == null)
             {
                 return null;
             }
