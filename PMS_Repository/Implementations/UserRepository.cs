@@ -27,7 +27,7 @@ namespace PMS_Repository.Implementations
             return await _unitOfWork.Save() >= 1 ? true : false;
         }
 
-        public async Task<bool> ChangePassword(string email, string oldPassword, string newPassword)
+        public async Task<bool> ChangePassword  (string email, string oldPassword, string newPassword)
         {
             bool result = false;
             int rowsaffected;

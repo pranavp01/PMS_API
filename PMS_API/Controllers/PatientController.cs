@@ -23,7 +23,7 @@ namespace PMS_API.Controllers
         }
 
         [HttpGet]
-        [Authorize("Patient,Admin,Physician,Nurse")]
+        [Authorize(Roles ="Patient,Admin,Physician,Nurse")]
         public async Task<ActionResult<IEnumerable<PatientModel>>> GetAllPatients()
         {
             var patients = await _patientBusiness.GetAll();

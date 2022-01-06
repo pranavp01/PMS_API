@@ -35,7 +35,7 @@ namespace PMS_Repository.Dtos
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseLoggerFactory(LoggerFactory.Create(builder => { builder.AddConsole(); })).EnableSensitiveDataLogging().UseSqlServer(@"Data Source=(LocalDB)\MSSQLLocalDB;Initial Catalog=PMSN;Integrated Security=True;Connect Timeout=30");
+                optionsBuilder.UseLoggerFactory(LoggerFactory.Create(builder => { builder.AddConsole(); })).EnableSensitiveDataLogging().UseSqlServer(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\PranavP3\ONEDRIVE - CITIUSTECH\DOCUMENTS\PMS.MDF;Integrated Security=True;Connect Timeout=30");
             }
         }
 
